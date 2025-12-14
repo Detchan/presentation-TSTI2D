@@ -1,15 +1,13 @@
-/* --------------------------------------------------
- * Variables & Base
- * -------------------------------------------------- */
+/* --- Variables & Base --- */
 :root {
-    --primary: #1a4d95; /* Bleu sombre/sophistiqué pour l'accentuation */
+    --primary: #1a4d95;
     --primary-light: #2c6eb8;
-    --bg: #f7f9fc; /* Arrière-plan très clair, légèrement bleu/gris */
+    --bg: #f7f9fc;
     --card-bg: #ffffff;
-    --text-primary: #1e293b; /* Texte très foncé */
+    --text-primary: #1e293b;
     --text-muted: #64748b;
-    --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.08); /* Ombre douce */
-    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15); /* Ombre plus marquée au survol */
+    --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
     --header-height: 80px; 
 }
 
@@ -19,13 +17,13 @@
 }
 
 body {
-    /* Utilisation de la police Roboto pour un look plus épuré (nécessite l'import dans index.html) */
+    /* police Roboto */
     font-family: 'Roboto', system-ui, 'Segoe UI', Arial, sans-serif;
     background: var(--bg);
     margin: 0;
     color: var(--text-primary);
     line-height: 1.6;
-    scroll-behavior: smooth; /* Défilement plus doux */
+    scroll-behavior: smooth;
 }
 
 h1, h2, h3 {
@@ -56,9 +54,7 @@ h1, h2, h3 {
 }
 
 
-/* --------------------------------------------------
- * Header and Nav
- * -------------------------------------------------- */
+/* --- Header et Nav --- */
 header {
     background: linear-gradient(135deg, var(--primary), var(--primary-light));
     color: white;
@@ -127,11 +123,8 @@ header h1 {
 }
 
 
-/* --------------------------------------------------
- * Table and Controls (Mise en page optimisée avec Grid)
- * -------------------------------------------------- */
+/* --- Table and Controls --- */
 .table-controls {
-    /* Utilisation de Grid pour un alignement propre des contrôles */
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive sur 200px minimum */
     gap: 20px; 
@@ -169,7 +162,7 @@ header h1 {
     font-weight: 500;
     transition: background 0.2s;
     flex-shrink: 0;
-    justify-self: start; /* Permet au bouton de ne pas s'étirer en largeur sur le grid */
+    justify-self: start; /* Permet au bouton de ne pas s'étirer */
     width: auto;
 }
 .table-controls button:hover {
@@ -224,9 +217,7 @@ header h1 {
 .bac5 { background-color: #0ea5e9; } 
 
 
-/* ------------------------------------------- */
 /* --- CARTE --- */
-/* ------------------------------------------- */
 #map {
     height: 500px; 
     width: 100%;
@@ -241,9 +232,7 @@ header h1 {
 }
 
 
-/* ------------------------------------------- */
-/* --- QUIZ (Centrage du contenu pour l'organisation) --- */
-/* ------------------------------------------- */
+/* --- QUIZ --- */
 #quiz-container {
     max-width: 800px; /* Limite la largeur du quiz sur grand écran */
     margin: 0 auto;
@@ -299,9 +288,7 @@ header h1 {
 }
 
 
-/* ------------------------------------------- */
-/* --- MINI-JEU (Amélioration de l'espacement) --- */
-/* ------------------------------------------- */
+/* --- MINI-JEU --- */
 .game-area {
     display: grid;
     grid-template-columns: 1fr;
@@ -373,9 +360,7 @@ header h1 {
 }
 
 
-/* ------------------------------------------- */
 /* --- RESPONSIVE MOBILE --- */
-/* ------------------------------------------- */
 @media (min-width: 768px) {
     .game-area {
         grid-template-columns: 1fr 1fr;
@@ -447,4 +432,5 @@ header h1 {
     .draggable {
         flex-shrink: 0;
     }
+
 }
