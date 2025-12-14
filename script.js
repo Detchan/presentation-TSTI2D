@@ -1,6 +1,4 @@
-/* --------------------------------------------------
-📍 DONNÉES DES ÉTABLISSEMENTS
--------------------------------------------------- */
+/* --- DONNÉES DES ÉTABLISSEMENTS --- */
   const places = [
   {id:1, name:"42 Le Havre", lat:49.4944, lon:0.1079, type:"dev", level:"bac+3", url:"https://www.42lehavre.fr"},
   {id:2, name:"IUT Le Havre – Informatique", lat:49.5048, lon:0.1127, type:"dev", level:"bac+3", url:"https://iut-lehavre.univ-lehavre.fr"},
@@ -36,10 +34,7 @@
   {id:32, name:"Holberton School Paris", lat:48.8566, lon:2.3522, type:"dev", level:"bac+3", url:"https://www.holbertonschool.com"}
 ];
 
-/* --------------------------------------------------
-📍 ICÔNES
--------------------------------------------------- */
-// Correction pour éviter que leaflet cherche des chemins relatifs si on est en PWA ou autre
+/* --- ICÔNES --- */
 if (L.Icon.Default && L.Icon.Default.imagePath) {
     L.Icon.Default.imagePath = 'https://unpkg.com/leaflet@1.9.4/dist/images/';
 }
@@ -47,9 +42,7 @@ const iconDev = L.icon({ iconUrl: "image/icon-dev.png", iconSize: [34,34], iconA
 const iconCyber = L.icon({ iconUrl: "image/icon-cyber.png", iconSize: [34,34], iconAnchor:[17,34] });
 const iconMixed = L.icon({ iconUrl: "image/icon-mixed.png", iconSize: [34,34], iconAnchor:[17,34] });
 
-/* --------------------------------------------------
-🗺️ CARTE
--------------------------------------------------- */
+/* --- CARTE --- */
 
 let map;
 let clusterGroup;
@@ -108,17 +101,13 @@ function addMarkers(levelFilter = "all") {
     });
 }
 
-/* --------------------------------------------------
-🔗 LIEN TABLEAU ↔ CARTE
--------------------------------------------------- */
+/* --- LIEN TABLEAU ↔ CARTE --- */
 function updateMapByLevel(level) {
     addMarkers(level);
 }
 
 
-/* -----------------------------
-   TABLE FORMATIONS
-   ----------------------------- */
+/* --- TABLE FORMATIONS --- */
 
 const formationsTableData = [
   // Bac+2
@@ -197,9 +186,7 @@ function exportToCsv(filename = "formations.csv"){
 }
 
 
-/***************************
- * QUIZ
- ***************************/
+/*** QUIZ ***/
 const quizData = [
   {
     question: "Que signifie HTML ?",
@@ -322,9 +309,7 @@ function startQuiz() {
 }
 
 
-/***************************
- * MINI-JEU : "CLASSE-LES !" (MIS À JOUR AVEC SUPPORT TACTILE)
- ***************************/
+/*** MINI-JEU : "CLASSE-LES !" ***/
 const items = [
   { text: "HTML", category: "Développement" },
   { text: "Firewall", category: "Cybersécurité" },
@@ -346,7 +331,7 @@ function initGame() {
     let activeDraggable = null;
     let initialX, initialY, currentX, currentY;
 
-    // 1. Zones cibles
+    // Zones cibles
     categories.forEach(cat => {
         const zone = document.createElement("div");
         zone.className = "dropzone";
@@ -356,7 +341,7 @@ function initGame() {
         zone.addEventListener("dragover", e => e.preventDefault()); // Nécessaire pour le drag-and-drop classique
     });
 
-    // 2. Éléments à trier
+    // Éléments à trier
     items.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "draggable";
@@ -367,7 +352,7 @@ function initGame() {
 
         dragBox.appendChild(div);
 
-        // --- Événements MOUSE (Desktop) ---
+        // --- Événements souris (PC) ---
         div.addEventListener("dragstart", e => {
             e.dataTransfer.setData("text/plain", div.dataset.id);
             div.classList.add("dragging");
@@ -375,7 +360,7 @@ function initGame() {
         div.addEventListener("dragend", () => div.classList.remove("dragging"));
 
 
-        // --- Événements TOUCH (Mobile) ---
+        // --- Événements TOUCHER (Mobile) ---
         let originalParent = dragBox; 
         
         div.addEventListener("touchstart", e => {
@@ -413,7 +398,7 @@ function initGame() {
             div.style.left = (parseFloat(div.style.left) + dx) + 'px';
             div.style.top = (parseFloat(div.style.top) + dy) + 'px';
             
-            // Mise à jour des coordonnées initiales pour le prochain move
+            // Mise à jour des coordonnées initiales pour le prochain mouvement
             initialX = currentX;
             initialY = currentY;
         });
@@ -467,14 +452,14 @@ function initGame() {
             div.style.left = '';
             div.style.top = '';
 
-            // Si le drop était incorrect ou n'a pas eu lieu sur une zone, retour à la zone d'origine.
+            // Si le drop était incorrect ou n'a pas eu lieu sur une zone, retour à la zone d'origine
             if (!dropped || item.category !== originalParent.dataset.cat && originalParent.classList.contains('dropzone')) {
                  originalParent.appendChild(div);
             }
         });
     });
     
-    // 3. Gestion du drop MOUSE (pour garder la compatibilité Desktop)
+    // Gestion du drop souris
     document.querySelectorAll(".dropzone").forEach(zone => {
         zone.addEventListener("drop", e => {
             e.preventDefault();
@@ -511,25 +496,23 @@ function initGame() {
 }
 
 
-/* --------------------------------------------------
-⚙️ INITIALISATION GLOBALE
--------------------------------------------------- */
+/* --- INITIALISATION GLOBALE--- */
 
 function initApp() {
-    // 1. Initialisation des composants dynamiques
+    // Initialisation des composants dynamiques
     initMap(); 
     startQuiz();
     initGame();
     renderFormations(); 
 
-    // 2. Récupération des éléments du DOM
+    // Récupération des éléments du DOM
     const levelFilter = document.getElementById("levelFilter");
     const searchInput = document.getElementById("formationSearch");
     const exportBtn = document.getElementById("exportCsv");
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
-    // 3. Ajout des écouteurs d'événements (Tableau & Carte)
+    // Ajout des écouteurs d'événements (Tableau & Carte)
     if (levelFilter && searchInput && exportBtn) {
         const updateAll = () => {
             const currentLevel = levelFilter.value;
@@ -544,7 +527,7 @@ function initApp() {
         exportBtn.addEventListener("click", exportToCsv);
     }
     
-    // 4. Menu mobile
+    // Menu mobile
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('show');
@@ -563,3 +546,4 @@ function initApp() {
 
 // Point d'entrée : Exécuter l'initialisation après que le DOM est complètement chargé
 document.addEventListener('DOMContentLoaded', initApp);
+
