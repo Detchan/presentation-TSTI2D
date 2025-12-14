@@ -1,0 +1,450 @@
+/* --------------------------------------------------
+ * Variables & Base
+ * -------------------------------------------------- */
+:root {
+    --primary: #1a4d95; /* Bleu sombre/sophistiqué pour l'accentuation */
+    --primary-light: #2c6eb8;
+    --bg: #f7f9fc; /* Arrière-plan très clair, légèrement bleu/gris */
+    --card-bg: #ffffff;
+    --text-primary: #1e293b; /* Texte très foncé */
+    --text-muted: #64748b;
+    --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.08); /* Ombre douce */
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15); /* Ombre plus marquée au survol */
+    --header-height: 80px; 
+}
+
+/* Base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* Utilisation de la police Roboto pour un look plus épuré (nécessite l'import dans index.html) */
+    font-family: 'Roboto', system-ui, 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Défilement plus doux */
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* Layout */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 18px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 18px; 
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: var(--shadow-subtle);
+    transition: all .3s ease;
+    border: 1px solid #e2e8f0; 
+}
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+
+/* --------------------------------------------------
+ * Header and Nav
+ * -------------------------------------------------- */
+header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+header .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-links li a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.1s;
+    display: block;
+    font-weight: 400;
+    border: 1px solid transparent;
+}
+.nav-links li a:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-1px);
+}
+
+.nav-toggle {
+    display: none; 
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+
+/* --------------------------------------------------
+ * Table and Controls (Mise en page optimisée avec Grid)
+ * -------------------------------------------------- */
+.table-controls {
+    /* Utilisation de Grid pour un alignement propre des contrôles */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive sur 200px minimum */
+    gap: 20px; 
+    align-items: center; 
+    margin-bottom: 25px;
+    padding: 20px; 
+    background: #f1f5f9;
+    border-radius: 12px;
+}
+.table-controls label { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 500;
+}
+.table-controls input, .table-controls select, .table-controls button {
+    padding: 10px 12px; 
+    border-radius: 8px; 
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    background: white;
+}
+.table-controls input:focus, .table-controls select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+.table-controls button {
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 500;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    justify-self: start; /* Permet au bouton de ne pas s'étirer en largeur sur le grid */
+    width: auto;
+}
+.table-controls button:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.table-wrap { 
+    overflow-x: auto; 
+}
+.nice-table { 
+    width: 100%; 
+    border-collapse: separate; 
+    border-spacing: 0;
+    background: var(--card-bg); 
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.nice-table thead { 
+    background: linear-gradient(90deg,#e2e8f0,#f0f4f8); 
+    color: var(--primary);
+}
+.nice-table th, .nice-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+.nice-table th {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nice-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px; 
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-block;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.bac2 { background-color: #f97316; } 
+.bac3 { background-color: #22c55e; } 
+.bac5 { background-color: #0ea5e9; } 
+
+
+/* ------------------------------------------- */
+/* --- CARTE --- */
+/* ------------------------------------------- */
+#map {
+    height: 500px; 
+    width: 100%;
+    border-radius: 12px; 
+    margin-top: 15px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.leaflet-popup a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+
+/* ------------------------------------------- */
+/* --- QUIZ (Centrage du contenu pour l'organisation) --- */
+/* ------------------------------------------- */
+#quiz-container {
+    max-width: 800px; /* Limite la largeur du quiz sur grand écran */
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+#quiz-container h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+.quiz-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+}
+.quiz-choice {
+    padding: 14px 20px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    text-align: left;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    color: var(--text-primary);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+.quiz-choice:hover:not(:disabled) {
+    background: #eef2ff;
+    border-color: var(--primary-light);
+    transform: translateX(5px); 
+}
+.quiz-choice:disabled {
+    cursor: default;
+    opacity: 0.9;
+}
+.quiz-feedback {
+    min-height: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+#quiz-container button#retry {
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+
+/* ------------------------------------------- */
+/* --- MINI-JEU (Amélioration de l'espacement) --- */
+/* ------------------------------------------- */
+.game-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px; 
+}
+
+.draggables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 25px;
+    border: 2px dashed #94a3b8;
+    background: #f1f5f9;
+    border-radius: 12px;
+    min-height: 120px;
+    align-content: flex-start;
+}
+
+.targets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+.draggable {
+    background: var(--primary);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: opacity 0.2s, transform 0.1s;
+    font-weight: 500;
+}
+.draggable:active {
+    transform: scale(0.98);
+}
+.draggable.dragging {
+    opacity: 0.6;
+}
+
+.dropzone {
+    border: 2px solid #cbd5e1;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    min-height: 180px;
+    transition: background 0.3s, border-color 0.3s;
+    flex-grow: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.dropzone h4 {
+    color: var(--text-muted);
+    margin-top: 0;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+    font-weight: 400;
+}
+
+.dropzone.success {
+    background: #f0fff4; 
+    border-color: #34d399;
+}
+
+.dropzone.error {
+    background: #fffafa; 
+    border-color: #f87171;
+}
+
+
+/* ------------------------------------------- */
+/* --- RESPONSIVE MOBILE --- */
+/* ------------------------------------------- */
+@media (min-width: 768px) {
+    .game-area {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    header h1 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .navbar {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+    .nav-toggle {
+        display: block;
+        order: 2;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(0,0,0,0.85); 
+        backdrop-filter: blur(8px);
+        padding: 12px;
+        border-radius: 12px;
+        display: none;
+        position: absolute;
+        top: 65px; 
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li a {
+        width: 100%;
+        padding: 12px 18px;
+        background: transparent;
+    }
+    
+    .table-controls {
+        /* Revenir à la colonne simple sur mobile pour la lisibilité */
+        grid-template-columns: 1fr;
+        gap: 15px;
+        align-items: stretch;
+    }
+    .table-controls label {
+        width: 100%;
+    }
+    .table-controls input, .table-controls select, .table-controls button {
+        width: 100%;
+    }
+    
+    .quiz-choices {
+        align-items: stretch;
+    }
+    
+    .draggable {
+        flex-shrink: 0;
+    }
+}

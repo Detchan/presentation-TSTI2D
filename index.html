@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Développeur Web & Cybersécurité</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="icon-192.png" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Développeur Web & Cybersécurité</h1>
+      <nav>
+        <nav class="navbar">
+          <button class="nav-toggle" id="navToggle">☰</button>
+
+          <ul class="nav-links" id="navMenu">
+            <li><a href="#intro">Présentation</a></li> 
+            <li><a href="#formations">Établissements</a></li>
+            <li><a href="#quiz">Activités</a></li>
+          </ul>
+        </nav>
+      </div>
+  </header>
+
+  <main class="container">
+    <section id="intro" class="card">
+      <h2>Présentation</h2>
+      <p>
+        Bienvenue sur cette application interactive. L'objectif est de vous présenter les deux carrières passionnantes de <strong>Développeur Web</strong> et de professionnel de la <strong>Cybersécurité</strong>.
+      </p>
+      <p>
+        Vous trouverez ci-dessous :
+      </p>
+      <ul>
+        <li>Un tableau répertoriant les <strong>formations post-bac</strong> (BTS, BUT, Licence, Master/Ingénieur) adaptées à ces deux filières.</li>
+        <li>Une <strong>carte interactive</strong> pour localiser des exemples d'établissements en France.</li>
+        <li>Des <strong>activités ludiques</strong> (Quiz et Mini-jeu) pour tester vos connaissances dans ces domaines.</li>
+      </ul>
+    </section>
+
+    <section id="formations" class="card">
+      <h2>Formations (post-bac)</h2>
+
+      <div class="table-controls">
+        <label>Filtrer : 
+          <select id="levelFilter">
+            <option value="all">Tous</option>
+            <option value="bac+2">Bac+2</option>
+            <option value="bac+3">Bac+3</option>
+            <option value="bac+5">Bac+5</option>
+          </select>
+        </label>
+
+        <label>Rechercher : 
+          <input id="formationSearch" placeholder="Ex : BTS, Licence, EPITA..." />
+        </label>
+
+        <button id="exportCsv">Exporter CSV</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="formationsTable" class="nice-table">
+          <thead>
+            <tr>
+              <th>Niveau</th>
+              <th>Intitulé</th>
+              <th>Durée indicative</th>
+              <th>Remarques / Exemples d'établissements</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="carte" class="card">
+      <h2>Carte interactive — Établissements en France</h2>
+      <div class="map-wrap">
+        <div id="map"></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="card">
+      <h2>Quiz</h2>
+      <div id="quiz-container"></div>
+    </section>
+
+    <section id="jeu" class="card">
+      <h2>Mini-jeu — Classe-les !</h2>
+      <div class="game-area">
+        <div class="draggables"></div>
+        <div class="targets"></div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
